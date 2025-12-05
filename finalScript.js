@@ -89,31 +89,35 @@ function generateWorkout(goal) {
     const level = document.getElementById("level").value;
 
     // Validate goal and level
-    if (!workouts[goal]) {
-        document.getElementById("result-text").innerHTML = "<p>Invalid goal selected.</p>";
+    if (!workouts[goal] || !workouts[goal][level]) {
+        document.getElementById("result-text").innerHTML = "<p>Invalid selection.</p>";
         return;
     }
-    if (!workouts[goal][level]) {
-        document.getElementById("result-text").innerHTML = "<p>Invalid level selected.</p>";
-        return;
-    }
-
     const exercises = workouts[goal][level];
     let routine = "";
-
+    
     // Generate routines per day
     for (let i = 1; i <= days; i++) {
         routine += `<h3>Day ${i}</h3>`;
         routine += "<ul>";
 
-        // 5 exercises per day (random but level-based)
-        for (let j = 0; j < 5; j++) {
-            const randomExercise = exercises[Math.floor(Math.random() * exercises.length)];
-            routine += `<li>${randomExercise}</li>`;
-        }
+        // Prevent exercise repetition per day
+        let dailyExercises = [...exercises]; //Copy the array
+        shuffleArray(dailyExercises);//Shuffle it
+        let selected = dailyExercises.slice(0, 5);//Take the first 5 (unique)
 
+        selected.forEach(exercise => {
+            routine += `<li>${exercise}</li>`;
+        });
         routine += "</ul>";
     }
 
     document.getElementById("result-text").innerHTML = routine;
+}
+//Helper function: Shuffle array (Fisher-Yates)
+functionshuffleArray(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
 }
