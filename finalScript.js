@@ -1,0 +1,119 @@
+//Workout data
+const workouts = {
+    muscle_gain: {
+        beginner:[
+            "Bodyweight Squats",
+            "Knee Push-ups",
+            "Light Romanian Deadlift",
+            "Band Rows",
+            "Hip Thrust (No weights)",
+            "Shoulder Press with Bottles",
+            "Basic Plank"
+        ],
+        intermediate:[
+            "Bulgarian Split Squats",
+            "Standard Push-ups",
+            "Romanian Deadlift (Moderate weight)",
+            "Dumbbell Row",
+            "Weighted Hip Thrust",
+            "Dumbbell Shoulder Press",
+            "Side Plank"
+        ],
+        advanced:[
+            "Heavy Weighted Squats",
+            "Weighted/Decline Push-ups",
+            "Heavy Romanian Deadlift",
+            "Pull-ups",
+            "Heavy Hip Thrust",
+            "Barbell Military Press",
+            "Dragon Flag"
+        ]
+    },
+    weight_loss: {
+        beginner:[
+            "Fast Walking",
+            "High-rep Squats",
+            "Step-ups",
+            "Low-impact Jumps",
+            "Low-impact Jacks",
+             "20-30s Plank"
+        ],
+        intermediate:[
+            "Light Jogging",
+            "Modified Burpees",
+            "Jump Rope",
+            "Fast Mountain Climbers",
+            "Jump Squats",
+            "HIIT 20s ON / 10s OFF"
+        ],
+        advanced:[
+            "Sprint Intervals",
+            "Full Burpees", 
+            "Box Jumps",
+            "Fast Jump Rope",
+            "Explosive Mountain Climbers",
+            "HIIT 40s ON / 20s OFF"
+        ]
+    },
+
+    definition:{
+        beginner:[
+            "Slow-tempo Squats",
+            "Reverse Lunges",
+            "Knee Push-ups",
+            "Band Rows", 
+            "30s Planks",
+            "Incline Walking"
+        ],
+        intermediate:[
+            "Moderate-weight Squats",
+            "Walking Lunges (Light Weight)",
+            "Standard Push-ups",
+            "Moderate-weight Rows", 
+            "Mountain Climbers",
+            "45-60s Planks"
+        ],
+        advanced:[
+            "Pause Squats",
+            "Weighted Lateral Lunges",
+            "Plyometric Push-ups",
+            "Heavy Rows",
+            "HIIT 30s ON / 30s OFF",
+            "Advanced Planks"
+        ]
+    }
+};
+
+function generateWorkout(goal) {
+    const days = parseInt(document.getElementById("days").value);
+    const level = document.getElementById("level").value;
+
+    // Validate goal and level
+    if (!workouts[goal]) {
+        document.getElementById("result-text").innerHTML = "<p>Invalid goal selected.</p>";
+        return;
+    }
+    if (!workouts[goal][level]) {
+        document.getElementById("result-text").innerHTML = "<p>Invalid level selected.</p>";
+        return;
+    }
+
+    const exercises = workouts[goal][level];
+    let routine = "";
+
+    // Generate routines per day
+    for (let i = 1; i <= days; i++) {
+        routine += `<h3>Day ${i}</h3>`;
+        routine += "<ul>";
+
+        // 5 exercises per day (random but level-based)
+        for (let j = 0; j < 5; j++) {
+            const randomExercise = exercises[Math.floor(Math.random() * exercises.length)];
+            routine += `<li>${randomExercise}</li>`;
+        }
+
+        routine += "</ul>";
+    }
+
+    document.getElementById("result-text").innerHTML = routine;
+}
