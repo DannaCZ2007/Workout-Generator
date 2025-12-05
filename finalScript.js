@@ -104,7 +104,7 @@ function generateWorkout(goal) {
         // Prevent exercise repetition per day
         let dailyExercises = [...exercises]; //Copy the array
         shuffleArray(dailyExercises);//Shuffle it
-        let selected = dailyExercises.slice(0, 5);//Take the first 5 (unique)
+        let selected = dailyExercises.slice(0, Math.min(5, dailyExercises.length));
 
         selected.forEach(exercise => {
             routine += `<li>${exercise}</li>`;
@@ -115,7 +115,7 @@ function generateWorkout(goal) {
     document.getElementById("result-text").innerHTML = routine;
 }
 //Helper function: Shuffle array (Fisher-Yates)
-functionshuffleArray(arr) {
+function shuffleArray(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
         [arr[i], arr[j]] = [arr[j], arr[i]];
