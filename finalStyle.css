@@ -1,3 +1,4 @@
+/*General body*/
 body {
     font-family: "Aptos", Arial, sans-serif;
     background-color: #f5f7fa;
@@ -8,12 +9,14 @@ body {
     align-items: center;
 }
 
+/*Heading*/
 h1 {
     color: #0a3d62;
     font-weight: 700;
     margin-bottom: 20px;
 }
 
+/*Buttons*/
 button {
     background-color: #1e90ff;
     color: white;
@@ -31,6 +34,24 @@ button:hover {
     background-color: #0b74d5;
 }
 
+/*Labels and selects*/
+label {
+    font-size: 16px;
+    margin-top: 12px;
+    margin-bottom: 4px;
+    display: block;
+}
+
+select {
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    margin-bottom: 12px;
+    cursor: pointer;
+}
+
+/*Result Box*/
 #result-box {
     margin-top: 25px;
     padding: 20px;
@@ -40,8 +61,20 @@ button:hover {
     max-width: 500px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
+
+/*Result text*/
 #result-text {
     font-size: 18px;
     color:#333;
     line-height: 1.4;
+}
+
+/*Improvement in lists inside results*/
+#result-box ul {
+    padding-left: 20px;
+    margin-top: 8px;
+}
+
+#result-box li {
+    margin-bottom: 6px;
 }
